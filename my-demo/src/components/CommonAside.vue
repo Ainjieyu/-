@@ -89,5 +89,13 @@ export default {
       console.log(key, keyPath);
     },
   },
+  computed:{
+    noChildren(){
+      return this.menuData.filter(item => !item.children)
+    },
+    hasChildren(){
+      return this.menuData.filter(item => item.children)
+    }
+  }
 };
 </script>
