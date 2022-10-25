@@ -6,9 +6,9 @@
     @close="handleClose"
     :collapse="isCollapse"
   >
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <span slot="title">导航二</span>
+    <el-menu-item v-for="item in noChildren" :key="item.name" :index="item.name">
+      <i :class="`el-icon-${item.icon}`"></i>
+      <span slot="title">{{item.label}}</span>
     </el-menu-item>
     <el-submenu index="1">
       <template slot="title">
