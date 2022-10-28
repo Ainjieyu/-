@@ -11,6 +11,7 @@
   >
   <h3>后台管理系统</h3>
     <el-menu-item
+    @click="clickMenu(item)"
       v-for="item in noChildren"
       :key="item.name"
       :index="item.name"
@@ -32,7 +33,7 @@
         :key="subItem.path"
         :index="subItem.path"
       >
-        <el-menu-item :index="subItem.path">{{ subItem.label }}</el-menu-item>
+        <el-menu-item @click="clickMenu(subItem)" :index="subItem.path">{{ subItem.label }}</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
   </el-menu>
@@ -114,6 +115,12 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
+    clickMenu(item){
+      if(this.$route.path !== item.path && !(this.$route.path === '/home' && (item.path === '/'))){
+        this.$router.push(item.path)
+      }
+      
+    }
   },
   computed: {
     noChildren() {
