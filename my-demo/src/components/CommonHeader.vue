@@ -1,7 +1,7 @@
 <template>
   <div class="header-container">
     <div class="l-content">
-      <el-button icon="el-icon-menu" size="mini"></el-button>
+      <el-button @click="handleMenu" icon="el-icon-menu" size="mini"></el-button>
       <span class="text">首页</span>
     </div>
     <div class="r-content">
@@ -22,6 +22,11 @@ export default {
   data() {
     return {};
   },
+  methods:{
+    handleMenu(){
+      this.$store.commit('collaspeMenu')
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
