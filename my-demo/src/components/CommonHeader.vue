@@ -1,14 +1,22 @@
 <template>
   <div class="header-container">
     <div class="l-content">
-      <el-button @click="handleMenu" icon="el-icon-menu" size="mini"></el-button>
-      <span class="text">首页</span>
+      <el-button
+        @click="handleMenu"
+        icon="el-icon-menu"
+        size="mini"
+        style="margin-right:20px"
+      ></el-button>
+      <!-- //面包屑 -->
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item v-for="item in tags" :key="item.path" :to="{ path:item.path }">{{item.label}}</el-breadcrumb-item>
+      </el-breadcrumb>
     </div>
     <div class="r-content">
       <el-dropdown>
         <span class="el-dropdown-link">
-          <img class="user" src="../assets/images/user.png" alt="">
-        </span>
+          <img class="user" src="../assets/images/user.png" alt="" />
+        </span> 
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人中心</el-dropdown-item>
           <el-dropdown-item>退出</el-dropdown-item>
@@ -17,18 +25,31 @@
     </div>
   </div>
 </template>
+
+
 <script>
+import { mapState } from 'vuex';
 export default {
   data() {
     return {};
   },
-  methods:{
-    handleMenu(){
-      this.$store.commit('collaspeMenu')
-    }
+  methods: {
+    handleMenu() {
+      this.$store.commit("collaspeMenu");
+    },
+  },
+  computed:{
+    ...mapState({
+      tags : state => state.tab.tabsList
+    })
+  },
+  mounted(){
+    console.log(this.tags,'tags')
   }
 };
 </script>
+
+
 <style lang="less" scoped>
 .header-container {
   padding: 0 20px;
@@ -43,11 +64,28 @@ export default {
   font-size: 14xp;
   margin-left: 10px;
 }
-.r-content{
-    .user{
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
+.r-content {
+  .user {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+.l-content{
+  display: flex;
+  align-items: center;
+  /deep/.el-breadcrumb__item{
+    .el-breadcrumb__inner{
+      font-weight: normal;
+      &.is-link{
+        color:#666
+      }
     }
+    &:last-child{
+      .el-breadcrumb__inner{
+        color:#fff
+      }
+    }
+  }
 }
 </style>
