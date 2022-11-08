@@ -41,6 +41,7 @@ export default {
     handleClick(command){
       if(command === 'cancel'){
         Cookie.remove('token')
+        Cookie.remove('menu')
         this.$router.push('/login')
       }
     },
